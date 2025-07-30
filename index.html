@@ -4,19 +4,21 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>NGL Spam Tool by Vern</title>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
   <style>
     * {
       box-sizing: border-box;
-      font-family: 'Courier New', monospace;
+      font-family: 'Share Tech Mono', monospace;
+      font-weight: bold;
     }
 
     html, body {
       margin: 0;
       padding: 0;
       height: 100%;
-      overflow: hidden;
       background: black;
-      color: #00ffea;
+      color: #00ffff;
+      overflow: hidden;
     }
 
     canvas {
@@ -32,7 +34,7 @@
       height: 200%;
       top: -50%;
       left: -50%;
-      background: radial-gradient(circle, #00ffea20, #000000);
+      background: radial-gradient(circle, #00ffff20, #000000);
       animation: pulse 8s ease-in-out infinite alternate;
       z-index: -4;
     }
@@ -48,7 +50,7 @@
       left: -30%;
       width: 60%;
       max-width: 800px;
-      opacity: 0.25;
+      opacity: 0.2;
       z-index: -2;
       animation: fly 30s linear infinite;
       pointer-events: none;
@@ -63,16 +65,18 @@
     .container {
       position: relative;
       z-index: 10;
-      background: rgba(0, 0, 0, 0.8);
-      border: 2px solid #00ffea;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 0 20px #00ffea;
+      background: rgba(0, 0, 0, 0.85);
+      padding: 25px;
+      border-radius: 10px;
       width: 90%;
       max-width: 500px;
       margin: 5% auto;
       text-align: center;
       animation: fadeIn 2s ease;
+      box-shadow:
+        0 0 0 2px #00ffff,
+        0 0 0 6px rgba(0, 255, 255, 0.2),
+        0 0 20px #00ffff;
     }
 
     @keyframes fadeIn {
@@ -81,9 +85,9 @@
     }
 
     h1 {
-      font-size: 2rem;
-      margin-bottom: 20px;
-      color: #00ffea;
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      color: #00ffff;
       animation: typing 3s steps(40, end), blink 0.75s step-end infinite;
       white-space: nowrap;
       overflow: hidden;
@@ -101,51 +105,60 @@
 
     input, textarea, button {
       width: 100%;
-      margin: 10px 0;
-      padding: 12px;
-      border: 1px solid #00ffea;
-      background: black;
-      color: #00ffea;
-      font-size: 1rem;
+      margin: 8px 0;
+      padding: 10px;
+      font-size: 0.9rem;
       border-radius: 8px;
+      border: 2px solid #00ffff;
+      background: #000;
+      color: #00ffff;
       outline: none;
+      box-shadow: inset 0 0 5px #00ffff66;
+    }
+
+    input::placeholder, textarea::placeholder {
+      color: #00ffff88;
+    }
+
+    textarea {
+      resize: none;
     }
 
     button {
-      background: #00ffea;
-      color: black;
+      background: #00ffff;
+      color: #000;
       font-weight: bold;
       cursor: pointer;
       transition: 0.3s ease;
+      box-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff55 inset;
     }
 
     button:hover {
       background: #0ff;
-      box-shadow: 0 0 10px #0ff;
+      box-shadow: 0 0 25px #0ff;
     }
 
     #result {
-      margin-top: 20px;
-      font-weight: bold;
+      margin-top: 15px;
+      font-size: 0.85rem;
       color: #0f0;
+      text-shadow: 0 0 5px #00ffcc;
     }
 
     .footer {
       margin-top: 20px;
-      font-size: 0.9rem;
+      font-size: 0.8rem;
       color: #aaa;
-      text-shadow: 0 0 3px #00ffea;
+      text-shadow: 0 0 3px #00ffff;
     }
   </style>
 </head>
 <body>
 
-<!-- Layered FX -->
 <div class="animated-glow"></div>
 <canvas id="matrix"></canvas>
 <img src="/mnt/data/A_digital_artwork_features_a_phoenix_soaring_throu.png" alt="Phoenix" class="phoenix" />
 
-<!-- UI -->
 <div class="container">
   <h1>>_ NGL SPAMMER</h1>
   <input type="text" id="username" placeholder="Enter Username">
@@ -153,14 +166,12 @@
   <textarea id="message" rows="4" placeholder="Enter Message"></textarea>
   <button onclick="sendSpam()">Execute Spam 🦅</button>
   <div id="result"></div>
-  <div class="footer">🔥 Created by <strong>Vern 🔥</strong></div>
+  <div class="footer">🔥 Created by <strong>Vern</strong></div>
 </div>
 
 <script>
-  // Matrix Background
   const canvas = document.getElementById("matrix");
   const ctx = canvas.getContext("2d");
-
   canvas.height = window.innerHeight;
   canvas.width = window.innerWidth;
 
@@ -173,7 +184,7 @@
   function drawMatrix() {
     ctx.fillStyle = "rgba(0, 0, 0, 0.07)";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = "#0F0";
+    ctx.fillStyle = "#00ffff";
     ctx.font = fontSize + "px monospace";
 
     for (let i = 0; i < drops.length; i++) {
@@ -190,7 +201,6 @@
     canvas.height = window.innerHeight;
   });
 
-  // API Function
   async function sendSpam() {
     const username = document.getElementById('username').value.trim();
     const amount = document.getElementById('amount').value.trim();
